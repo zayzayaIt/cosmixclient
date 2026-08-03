@@ -4,7 +4,7 @@
 
 <!--
 
-This file is from ${date}
+This file is from 8/3/2026
 
 Be aware that some server owners are lazy and do not update their client regularly
 

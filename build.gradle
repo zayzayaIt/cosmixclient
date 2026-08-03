@@ -76,3 +76,8 @@ tasks.register('runclient', JavaExec) {
     workingDir "./desktopRuntime"
     main 'net.lax1dude.eaglercraft.internal.MainClass'
 }
+
+// Ensure Java 17 language features are enabled during compilation
+tasks.withType(JavaCompile).configureEach {
+    options.release = 17
+}
