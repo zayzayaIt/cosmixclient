@@ -28,6 +28,45 @@
 						logInvalidCerts: true,
 						crashOnUncaughtExceptions: true
 					};
+					// Normalize absolute-root asset paths so site works under a project subpath (GitHub Pages)
+					(function(){
+						var basePrefix = '';
+						var projectSubpath = '/cosmixclient';
+						if(location.pathname.indexOf(projectSubpath + '/') === 0 || location.pathname === projectSubpath || location.pathname === projectSubpath + '/'){
+							basePrefix = projectSubpath;
+						}
+						function normalizePath(p){
+							if(typeof p === 'string' && p.length && p.charAt(0) === '/') return basePrefix + p;
+							return p;
+						}
+						// Patch common EagRuntime resource helpers if present
+						if(window.EagRuntime){
+							['getResourceString','getRequiredResourceString','getResourceBytes','getRequiredResourceBytes','getResourceStream'].forEach(function(fn){
+								if(typeof window.EagRuntime[fn] === 'function'){
+									var orig = window.EagRuntime[fn];
+									window.EagRuntime[fn] = function(p){ if(p && p.charAt && p.charAt(0) === '/') p = normalizePath(p); return orig.call(this,p); };
+								}
+							});
+						}
+						// Rewrite outgoing network requests that use absolute-root paths
+						if(window.fetch){
+							var _fetch = window.fetch.bind(window);
+							window.fetch = function(input, init){
+								try{
+									if(typeof input === 'string') input = normalizePath(input);
+									else if(input && input.url && typeof input.url === 'string') input = new Request(normalizePath(input.url), input);
+								}catch(e){}
+								return _fetch(input, init);
+							};
+						}
+						if(window.XMLHttpRequest){
+							var _open = XMLHttpRequest.prototype.open;
+							XMLHttpRequest.prototype.open = function(method, url){
+								try{ url = normalizePath(url); }catch(e){}
+								return _open.apply(this, arguments);
+							};
+						}
+					})();
 					main();
 				}
 			});
