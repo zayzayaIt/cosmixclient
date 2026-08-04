@@ -18,6 +18,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Build web client
+        run: |
+          chmod +x ./gradlew
+          export JAVA_HOME=$RUNNER_TOOL_CACHE/jdk/$(ls $RUNNER_TOOL_CACHE/jdk | head -n 1)/x64
+          export PATH="$JAVA_HOME/bin:$PATH"
+          ./gradlew generateJavascript --no-daemon
+
       - name: Prepare Pages publish directory
         run: |
           mkdir -p .pages-publish
