@@ -1,7 +1,5 @@
 package net.minecraft.client.resources;
 
-import com.google.common.base.Splitter;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,9 +14,18 @@ import net.lax1dude.eaglercraft.IOUtils;
 import net.minecraft.util.ResourceLocation;
 
 public class Locale {
-	/** Splits on "=" */
-	private static final Splitter SPLITTER = Splitter.on('=').limit(2);
 	private static final Pattern PATTERN = Pattern.compile("%(\\d+\\$)?[\\d\\.]*[df]");
+
+	private static String[] splitKeyValue(String s) {
+		int index = s.indexOf('=');
+		if (index < 0) {
+			return null;
+		}
+		String[] result = new String[2];
+		result[0] = s.substring(0, index);
+		result[1] = s.substring(index + 1);
+		return result;
+	}
 	Map<String, String> properties = Maps.<String, String>newHashMap();
 	private boolean unicode;
 
@@ -86,7 +93,7 @@ public class Locale {
 	private void loadLocaleData(InputStream inputStreamIn) throws IOException {
 		for (String s : IOUtils.readLines(inputStreamIn, StandardCharsets.UTF_8)) {
 			if (!s.isEmpty() && s.charAt(0) != 35) {
-				String[] astring = (String[]) Iterables.toArray(SPLITTER.split(s), String.class);
+				String[] astring = splitKeyValue(s);
 
 				if (astring != null && astring.length == 2) {
 					String s1 = astring[0];
