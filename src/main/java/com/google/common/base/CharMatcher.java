@@ -108,7 +108,12 @@ public abstract class CharMatcher implements Predicate<Character> {
 	 * Determines whether a character is ASCII, meaning that its code point is less
 	 * than 128.
 	 */
-	public static final CharMatcher ASCII = inRange('\0', '\u007f', "CharMatcher.ASCII");
+	public static final CharMatcher ASCII = new CharMatcher("CharMatcher.ASCII") {
+		@Override
+		public boolean matches(char c) {
+			return c >= '\0' && c <= '\u007f';
+		}
+	};
 
 	private static class RangesMatcher extends CharMatcher {
 		private final char[] rangeStarts;
@@ -237,11 +242,18 @@ public abstract class CharMatcher implements Predicate<Character> {
 	 * is any of SPACE_SEPARATOR, LINE_SEPARATOR, PARAGRAPH_SEPARATOR, CONTROL,
 	 * FORMAT, SURROGATE, and PRIVATE_USE according to ICU4J.
 	 */
-	public static final CharMatcher INVISIBLE = new RangesMatcher("CharMatcher.INVISIBLE",
-			("\u0000\u007f\u00ad\u0600\u061c\u06dd\u070f\u1680\u180e\u2000\u2028\u205f\u2066\u2067\u2068"
-					+ "\u2069\u206a\u3000\ud800\ufeff\ufff9\ufffa").toCharArray(),
-			("\u0020\u00a0\u00ad\u0604\u061c\u06dd\u070f\u1680\u180e\u200f\u202f\u2064\u2066\u2067\u2068"
-					+ "\u2069\u206f\u3000\uf8ff\ufeff\ufff9\ufffb").toCharArray());
+	public static final CharMatcher INVISIBLE = new CharMatcher("CharMatcher.INVISIBLE") {
+		@Override
+		public boolean matches(char c) {
+			return c == '\u0000' || c == '\u007f' || c == '\u00ad' || c == '\u0600' || c == '\u061c'
+					|| c == '\u06dd' || c == '\u070f' || c == '\u1680' || c == '\u180e' || c == '\u2000'
+					|| c == '\u2028' || c == '\u205f' || c == '\u2066' || c == '\u2067' || c == '\u2068'
+					|| c == '\u2069' || c == '\u206a' || c == '\u3000' || c == '\ud800' || c == '\ufeff'
+					|| c == '\ufff9' || c == '\ufffa' || c == '\u0020' || c == '\u00a0' || c == '\u0604'
+					|| c == '\u200f' || c == '\u202f' || c == '\u2064' || c == '\u206f' || c == '\u3000'
+					|| c == '\uf8ff' || c == '\ufff9' || c == '\ufffb';
+		}
+	};
 
 	private static String showCharacter(char c) {
 		String hex = "0123456789ABCDEF";
@@ -263,9 +275,12 @@ public abstract class CharMatcher implements Predicate<Character> {
 	 * <b>Note:</b> as the reference file evolves, we will modify this constant to
 	 * keep it up to date.
 	 */
-	public static final CharMatcher SINGLE_WIDTH = new RangesMatcher("CharMatcher.SINGLE_WIDTH",
-			"\u0000\u05be\u05d0\u05f3\u0600\u0750\u0e00\u1e00\u2100\ufb50\ufe70\uff61".toCharArray(),
-			"\u04f9\u05be\u05ea\u05f4\u06ff\u077f\u0e7f\u20af\u213a\ufdff\ufeff\uffdc".toCharArray());
+	public static final CharMatcher SINGLE_WIDTH = new CharMatcher("CharMatcher.SINGLE_WIDTH") {
+		@Override
+		public boolean matches(char c) {
+			return c >= '\u0000' && c <= '\u007f';
+		}
+	};
 
 	/** Matches any character. */
 	public static final CharMatcher ANY = new FastMatcher("CharMatcher.ANY") {
