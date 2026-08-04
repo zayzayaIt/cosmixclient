@@ -75,8 +75,8 @@ public class GuiMainMenu extends GuiScreen {
 	private static final ResourceLocation CUSTOM_TITLE_TEXTURE = new ResourceLocation(
 			"eagler:cosmixmc.png");
 	private static final ResourceLocation field_194400_H = new ResourceLocation("textures/gui/title/edition.png");
-	private static final ResourceLocation CUSTOM_MAIN_MENU_BACKGROUND = new ResourceLocation(
-			"eagler:backgroundnew.jpg");
+	    private static final ResourceLocation CUSTOM_MAIN_MENU_BACKGROUND = new ResourceLocation(
+		    "eagler:backgroundnew.png");
 
 	/** An array of all the paths to the panorama pictures. */
 	    private static final ResourceLocation[] TITLE_PANORAMA_PATHS = new ResourceLocation[] {
