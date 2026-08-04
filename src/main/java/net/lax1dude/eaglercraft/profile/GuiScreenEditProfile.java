@@ -36,6 +36,9 @@ import java.io.IOException;
  */
 public class GuiScreenEditProfile extends GuiScreen {
 
+	private static final ResourceLocation CUSTOM_MENU_BACKGROUND = new ResourceLocation(
+			"textures/gui/title/background/custom_menu_bg.jpg");
+
 	private final GuiScreen parent;
 	private GuiTextField usernameField;
 
@@ -93,7 +96,9 @@ public class GuiScreenEditProfile extends GuiScreen {
 	}
 
 	public void drawScreen(int mx, int my, float partialTicks) {
-		drawDefaultBackground();
+		this.mc.getTextureManager().bindTexture(CUSTOM_MENU_BACKGROUND);
+		GlStateManager.color(1.0f, 1.0f, 1.0f, 0.9f);
+		drawModalRectWithCustomSizedTexture(0, 0, 0.0f, 0.0f, this.width, this.height, 735.0f, 412.0f);
 		drawCenteredString(fontRendererObj, screenTitle, width / 2, 15, 16777215);
 		drawString(fontRendererObj, I18n.format("editProfile.username"), width / 2 - 20, height / 6 + 8, 10526880);
 		drawString(fontRendererObj, I18n.format("editProfile.playerSkin"), width / 2 - 20, height / 6 + 66, 10526880);

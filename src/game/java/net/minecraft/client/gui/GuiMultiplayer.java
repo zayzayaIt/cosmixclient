@@ -7,15 +7,19 @@ import java.io.IOException;
 import net.lax1dude.eaglercraft.Keyboard;
 import net.lax1dude.eaglercraft.cookie.ServerCookieDataStore;
 import net.lax1dude.eaglercraft.EagRuntime;
+import net.lax1dude.eaglercraft.opengl.GlStateManager;
 import net.minecraft.client.multiplayer.GuiConnecting;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.multiplayer.ServerList;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class GuiMultiplayer extends GuiScreen {
 	private static final Logger LOGGER = LogManager.getLogger();
+	private static final ResourceLocation CUSTOM_MENU_BACKGROUND = new ResourceLocation(
+			"textures/gui/title/background/custom_menu_bg.jpg");
 	private final GuiScreen parentScreen;
 	private ServerSelectionList serverListSelector;
 	private ServerList savedServerList;
@@ -274,7 +278,9 @@ public class GuiMultiplayer extends GuiScreen {
 	 */
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		this.hoveringText = null;
-		this.drawDefaultBackground();
+		this.mc.getTextureManager().bindTexture(CUSTOM_MENU_BACKGROUND);
+		GlStateManager.color(1.0f, 1.0f, 1.0f, 0.9f);
+		drawModalRectWithCustomSizedTexture(0, 0, 0.0f, 0.0f, this.width, this.height, 735.0f, 412.0f);
 		this.serverListSelector.drawScreen(mouseX, mouseY, partialTicks);
 		this.drawCenteredString(this.fontRendererObj, I18n.format("multiplayer.title"), this.width / 2, 20, 16777215);
 		super.drawScreen(mouseX, mouseY, partialTicks);
