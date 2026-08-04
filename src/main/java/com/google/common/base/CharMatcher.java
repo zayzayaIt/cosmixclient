@@ -159,8 +159,12 @@ public abstract class CharMatcher implements Predicate<Character> {
 	 * If you only care to match ASCII digits, you can use
 	 * {@code inRange('0', '9')}.
 	 */
-	public static final CharMatcher DIGIT = new RangesMatcher("CharMatcher.DIGIT", ZEROES.toCharArray(),
-			NINES.toCharArray());
+	public static final CharMatcher DIGIT = new CharMatcher("CharMatcher.DIGIT") {
+		@Override
+		public boolean matches(char c) {
+			return Character.isDigit(c);
+		}
+	};
 
 	/**
 	 * Determines whether a character is a digit according to
