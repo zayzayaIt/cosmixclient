@@ -73,6 +73,8 @@ public class GuiMainMenu extends GuiScreen {
 	private static final ResourceLocation MINECRAFT_TITLE_TEXTURES = new ResourceLocation(
 			"textures/gui/title/minecraft.png");
 	private static final ResourceLocation field_194400_H = new ResourceLocation("textures/gui/title/edition.png");
+	private static final ResourceLocation CUSTOM_MAIN_MENU_BACKGROUND = new ResourceLocation(
+			"textures/gui/title/background/custom_menu_bg.jpg");
 
 	/** An array of all the paths to the panorama pictures. */
 	private static final ResourceLocation[] TITLE_PANORAMA_PATHS = new ResourceLocation[] {
@@ -454,6 +456,9 @@ public class GuiMainMenu extends GuiScreen {
 		GlStateManager.disableAlpha();
 		this.renderSkybox(mouseX, mouseY, partialTicks);
 		GlStateManager.enableAlpha();
+		this.mc.getTextureManager().bindTexture(CUSTOM_MAIN_MENU_BACKGROUND);
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 0.85F);
+		drawModalRectWithCustomSizedTexture(0, 0, 0.0F, 0.0F, this.width, this.height, 735.0F, 412.0F);
 		int i = 274;
 		int j = this.width / 2 - 137;
 		int k = 30;
