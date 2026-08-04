@@ -79,13 +79,13 @@ public class GuiMainMenu extends GuiScreen {
 			"eagler:backgroundnew.jpg");
 
 	/** An array of all the paths to the panorama pictures. */
-	private static final ResourceLocation[] TITLE_PANORAMA_PATHS = new ResourceLocation[] {
-			new ResourceLocation("eagler:backgroundnew.jpg"),
-			new ResourceLocation("eagler:backgroundnew.jpg"),
-			new ResourceLocation("eagler:backgroundnew.jpg"),
-			new ResourceLocation("eagler:backgroundnew.jpg"),
-			new ResourceLocation("eagler:backgroundnew.jpg"),
-			new ResourceLocation("eagler:backgroundnew.jpg") };
+	    private static final ResourceLocation[] TITLE_PANORAMA_PATHS = new ResourceLocation[] {
+		    CUSTOM_MAIN_MENU_BACKGROUND,
+		    CUSTOM_MAIN_MENU_BACKGROUND,
+		    CUSTOM_MAIN_MENU_BACKGROUND,
+		    CUSTOM_MAIN_MENU_BACKGROUND,
+		    CUSTOM_MAIN_MENU_BACKGROUND,
+		    CUSTOM_MAIN_MENU_BACKGROUND };
 	private ResourceLocation backgroundTexture = null;
 	private static ResourceLocation backgroundTexture2 = null;
 
