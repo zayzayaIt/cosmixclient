@@ -15,6 +15,7 @@ import net.lax1dude.eaglercraft.PauseMenuCustomizeState;
 import net.lax1dude.eaglercraft.opengl.GlStateManager;
 import net.lax1dude.eaglercraft.opengl.RealOpenGLEnums;
 import net.minecraft.client.Minecraft;
+import net.lax1dude.eaglercraft.EagRuntime;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.Tessellator;
@@ -59,6 +60,8 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback {
 	protected FontRenderer fontRendererObj;
 
 	private static final ResourceLocation CUSTOM_MENU_BACKGROUND = new ResourceLocation("eagler:backgroundnew.jpg");
+	private static final ResourceLocation CUSTOM_MENU_BACKGROUND_ALT = new ResourceLocation("eagler:gui/backgroundnew.jpg");
+	private static final ResourceLocation CUSTOM_MENU_BACKGROUND_MC = new ResourceLocation("minecraft:gui/title/background/backgroundnew.jpg");
 
 	/** The button that was just pressed. */
 	protected GuiButton selectedButton;
@@ -496,10 +499,38 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback {
 	 */
 	public void drawDefaultBackground() {
 		if(this.mc != null && this.mc.world == null) {
-			this.mc.getTextureManager().bindTexture(CUSTOM_MENU_BACKGROUND);
+			// Prefer the bundled eagler background if it exists; try several possible locations
+			boolean found = false;
+			try {
+				if(EagRuntime.getResourceExists("/assets/eagler/backgroundnew.jpg")) {
+					System.out.println("Binding background: /assets/eagler/backgroundnew.jpg");
+					this.mc.getTextureManager().bindTexture(CUSTOM_MENU_BACKGROUND);
+					found = true;
+				}else if(EagRuntime.getResourceExists("/assets/eagler/gui/backgroundnew.jpg")) {
+					System.out.println("Binding background: /assets/eagler/gui/backgroundnew.jpg");
+					this.mc.getTextureManager().bindTexture(CUSTOM_MENU_BACKGROUND_ALT);
+					found = true;
+				}else if(EagRuntime.getResourceExists("/assets/minecraft/textures/gui/title/background/backgroundnew.jpg")) {
+					System.out.println("Binding background: /assets/minecraft/textures/gui/title/background/backgroundnew.jpg");
+					this.mc.getTextureManager().bindTexture(CUSTOM_MENU_BACKGROUND_MC);
+					found = true;
+				}
+			}catch(Throwable t) {
+				System.err.println("Error checking resource existence: " + t);
+			}
+			if(!found) {
+				// fallback to vanilla custom menu bg if present
+				if(EagRuntime.getResourceExists("/assets/minecraft/textures/gui/title/background/custom_menu_bg.jpg")) {
+					System.out.println("Binding fallback background: custom_menu_bg.jpg");
+					this.mc.getTextureManager().bindTexture(new ResourceLocation("minecraft:gui/title/background/custom_menu_bg.jpg"));
+				}else {
+					this.drawWorldBackground(0);
+					return;
+				}
+			}
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			drawModalRectWithCustomSizedTexture(0, 0, 0.0F, 0.0F, this.width, this.height, 735.0F, 412.0F);
-		}else {
+		} else {
 			this.drawWorldBackground(0);
 		}
 	}
