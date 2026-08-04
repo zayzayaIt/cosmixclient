@@ -537,6 +537,20 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback {
 
 	public void drawWorldBackground(int tint) {
 		if (this.mc.world != null) {
+			// If a bundled custom background exists, draw it for all screens (in-game and menus)
+			try {
+				if(EagRuntime.getResourceExists("/assets/eagler/backgroundnew.jpg") || EagRuntime.getResourceExists("/assets/eagler/gui/backgroundnew.jpg") || EagRuntime.getResourceExists("/assets/minecraft/textures/gui/title/background/backgroundnew.jpg")) {
+					ResourceLocation rl = CUSTOM_MENU_BACKGROUND;
+					if(EagRuntime.getResourceExists("/assets/eagler/gui/backgroundnew.jpg")) rl = CUSTOM_MENU_BACKGROUND_ALT;
+					if(EagRuntime.getResourceExists("/assets/minecraft/textures/gui/title/background/backgroundnew.jpg")) rl = CUSTOM_MENU_BACKGROUND_MC;
+					this.mc.getTextureManager().bindTexture(rl);
+					GlStateManager.color(1.0F,1.0F,1.0F,1.0F);
+					drawModalRectWithCustomSizedTexture(0, 0, 0.0F, 0.0F, this.width, this.height, 735.0F, 412.0F);
+					// continue to draw overlays (watermark, etc.)
+				}
+			} catch(Throwable t) {
+				// ignore and fallback to original behaviour
+			}
 			boolean ingame = isPartOfPauseMenu();
 			ResourceLocation loc = (ingame && PauseMenuCustomizeState.icon_background_pause != null)
 					? PauseMenuCustomizeState.icon_background_pause
