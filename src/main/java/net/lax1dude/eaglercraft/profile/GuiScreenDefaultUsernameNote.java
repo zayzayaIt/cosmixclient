@@ -3,6 +3,8 @@ package net.lax1dude.eaglercraft.profile;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
+import net.lax1dude.eaglercraft.opengl.GlStateManager;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Copyright (c) 2024 lax1dude. All Rights Reserved.
@@ -23,6 +25,7 @@ public class GuiScreenDefaultUsernameNote extends GuiScreen {
 
 	private final GuiScreen back;
 	private final GuiScreen cont;
+	private static final ResourceLocation CUSTOM_MENU_BACKGROUND = new ResourceLocation("eagler:backgroundnew.jpg");
 
 	public GuiScreenDefaultUsernameNote(GuiScreen back, GuiScreen cont) {
 		this.back = back;
@@ -37,7 +40,9 @@ public class GuiScreenDefaultUsernameNote extends GuiScreen {
 	}
 
 	public void drawScreen(int par1, int par2, float par3) {
-		this.drawDefaultBackground();
+		this.mc.getTextureManager().bindTexture(CUSTOM_MENU_BACKGROUND);
+		GlStateManager.color(1.0f, 1.0f, 1.0f, 0.9f);
+		drawModalRectWithCustomSizedTexture(0, 0, 0.0f, 0.0f, this.width, this.height, 735.0f, 412.0f);
 		this.drawCenteredString(fontRendererObj, I18n.format("defaultUsernameDetected.title"), this.width / 2, 70, 11184810);
 		this.drawCenteredString(fontRendererObj, I18n.format("defaultUsernameDetected.text0", EaglerProfile.getName()), this.width / 2, 90, 16777215);
 		this.drawCenteredString(fontRendererObj, I18n.format("defaultUsernameDetected.text1"), this.width / 2, 105, 16777215);

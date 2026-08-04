@@ -46,6 +46,7 @@ public class GuiScreenEditCape extends GuiScreen {
 	private int mousey = 0;
 
 	private static final ResourceLocation eaglerGui = new ResourceLocation("eagler:gui/eagler_gui.png");
+		private static final ResourceLocation CUSTOM_MENU_BACKGROUND = new ResourceLocation("eagler:backgroundnew.jpg");
 
 	protected String screenTitle = "Edit Cape";
 
@@ -77,7 +78,9 @@ public class GuiScreenEditCape extends GuiScreen {
 	}
 
 	public void drawScreen(int mx, int my, float partialTicks) {
-		drawDefaultBackground();
+		this.mc.getTextureManager().bindTexture(CUSTOM_MENU_BACKGROUND);
+		GlStateManager.color(1.0f, 1.0f, 1.0f, 0.9f);
+		drawModalRectWithCustomSizedTexture(0, 0, 0.0f, 0.0f, this.width, this.height, 735.0f, 412.0f);
 		drawCenteredString(fontRendererObj, screenTitle, width / 2, 15, 16777215);
 		drawString(fontRendererObj, I18n.format("editCape.playerCape"), width / 2 - 20, height / 6 + 36, 10526880);
 		

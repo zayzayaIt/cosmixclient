@@ -6,6 +6,8 @@ import net.lax1dude.eaglercraft.Keyboard;
 import net.lax1dude.eaglercraft.KeyboardConstants;
 import net.lax1dude.eaglercraft.socket.ConnectionHandshake;
 import net.lax1dude.eaglercraft.socket.HandshakePacketTypes;
+import net.lax1dude.eaglercraft.opengl.GlStateManager;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.GuiConnecting;
@@ -36,6 +38,7 @@ public class GuiAuthenticationScreen extends GuiScreen {
 	private GuiPasswordTextField password;
 	private int authTypeForWarning = Integer.MAX_VALUE;
 	private boolean allowPlaintext = false;
+	private static final ResourceLocation CUSTOM_MENU_BACKGROUND = new ResourceLocation("eagler:backgroundnew.jpg");
 
 	public GuiAuthenticationScreen(GuiConnecting retAfterAuthScreen, GuiScreen parent, String message) {
 		this.retAfterAuthScreen = retAfterAuthScreen;
@@ -97,7 +100,9 @@ public class GuiAuthenticationScreen extends GuiScreen {
 	}
 
 	public void drawScreen(int i, int j, float var3) {
-		drawBackground(0);
+		this.mc.getTextureManager().bindTexture(CUSTOM_MENU_BACKGROUND);
+		GlStateManager.color(1.0f, 1.0f, 1.0f, 0.9f);
+		drawModalRectWithCustomSizedTexture(0, 0, 0.0f, 0.0f, this.width, this.height, 735.0f, 412.0f);
 		this.password.drawTextBox();
 		this.drawCenteredString(this.fontRendererObj, I18n.format("auth.required", new Object[0]), this.width / 2,
 				this.height / 4 - 5, 16777215);
