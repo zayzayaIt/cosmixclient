@@ -279,7 +279,7 @@ public class GuiMultiplayer extends GuiScreen {
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		this.hoveringText = null;
 		this.mc.getTextureManager().bindTexture(CUSTOM_MENU_BACKGROUND);
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 0.9f);
+		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 		drawModalRectWithCustomSizedTexture(0, 0, 0.0f, 0.0f, this.width, this.height, 735.0f, 412.0f);
 		this.serverListSelector.drawScreen(mouseX, mouseY, partialTicks);
 		this.drawCenteredString(this.fontRendererObj, I18n.format("multiplayer.title"), this.width / 2, 20, 16777215);

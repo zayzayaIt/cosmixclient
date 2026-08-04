@@ -79,7 +79,7 @@ public class GuiScreenEditCape extends GuiScreen {
 
 	public void drawScreen(int mx, int my, float partialTicks) {
 		this.mc.getTextureManager().bindTexture(CUSTOM_MENU_BACKGROUND);
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 0.9f);
+		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 		drawModalRectWithCustomSizedTexture(0, 0, 0.0f, 0.0f, this.width, this.height, 735.0f, 412.0f);
 		drawCenteredString(fontRendererObj, screenTitle, width / 2, 15, 16777215);
 		drawString(fontRendererObj, I18n.format("editCape.playerCape"), width / 2 - 20, height / 6 + 36, 10526880);

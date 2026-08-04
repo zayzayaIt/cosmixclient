@@ -101,7 +101,7 @@ public class GuiAuthenticationScreen extends GuiScreen {
 
 	public void drawScreen(int i, int j, float var3) {
 		this.mc.getTextureManager().bindTexture(CUSTOM_MENU_BACKGROUND);
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 0.9f);
+		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 		drawModalRectWithCustomSizedTexture(0, 0, 0.0f, 0.0f, this.width, this.height, 735.0f, 412.0f);
 		this.password.drawTextBox();
 		this.drawCenteredString(this.fontRendererObj, I18n.format("auth.required", new Object[0]), this.width / 2,

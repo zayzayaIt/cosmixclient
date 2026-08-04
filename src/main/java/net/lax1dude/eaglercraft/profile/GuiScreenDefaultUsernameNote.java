@@ -41,7 +41,7 @@ public class GuiScreenDefaultUsernameNote extends GuiScreen {
 
 	public void drawScreen(int par1, int par2, float par3) {
 		this.mc.getTextureManager().bindTexture(CUSTOM_MENU_BACKGROUND);
-		GlStateManager.color(1.0f, 1.0f, 1.0f, 0.9f);
+		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 		drawModalRectWithCustomSizedTexture(0, 0, 0.0f, 0.0f, this.width, this.height, 735.0f, 412.0f);
 		this.drawCenteredString(fontRendererObj, I18n.format("defaultUsernameDetected.title"), this.width / 2, 70, 11184810);
 		this.drawCenteredString(fontRendererObj, I18n.format("defaultUsernameDetected.text0", EaglerProfile.getName()), this.width / 2, 90, 16777215);

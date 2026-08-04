@@ -58,6 +58,8 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback {
 	/** The FontRenderer used by GuiScreen */
 	protected FontRenderer fontRendererObj;
 
+	private static final ResourceLocation CUSTOM_MENU_BACKGROUND = new ResourceLocation("eagler:backgroundnew.jpg");
+
 	/** The button that was just pressed. */
 	protected GuiButton selectedButton;
 	private int eventButton;
@@ -493,7 +495,13 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback {
 	 * gradient over background.png
 	 */
 	public void drawDefaultBackground() {
-		this.drawWorldBackground(0);
+		if(this.mc != null && this.mc.world == null) {
+			this.mc.getTextureManager().bindTexture(CUSTOM_MENU_BACKGROUND);
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+			drawModalRectWithCustomSizedTexture(0, 0, 0.0F, 0.0F, this.width, this.height, 735.0F, 412.0F);
+		}else {
+			this.drawWorldBackground(0);
+		}
 	}
 
 	public void drawWorldBackground(int tint) {
