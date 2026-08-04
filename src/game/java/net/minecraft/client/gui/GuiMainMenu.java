@@ -78,12 +78,12 @@ public class GuiMainMenu extends GuiScreen {
 
 	/** An array of all the paths to the panorama pictures. */
 	private static final ResourceLocation[] TITLE_PANORAMA_PATHS = new ResourceLocation[] {
-			new ResourceLocation("textures/gui/title/background/panorama_0.png"),
-			new ResourceLocation("textures/gui/title/background/panorama_1.png"),
-			new ResourceLocation("textures/gui/title/background/panorama_2.png"),
-			new ResourceLocation("textures/gui/title/background/panorama_3.png"),
-			new ResourceLocation("textures/gui/title/background/panorama_4.png"),
-			new ResourceLocation("textures/gui/title/background/panorama_5.png") };
+			new ResourceLocation("eagler:backgroundnew.jpg"),
+			new ResourceLocation("eagler:backgroundnew.jpg"),
+			new ResourceLocation("eagler:backgroundnew.jpg"),
+			new ResourceLocation("eagler:backgroundnew.jpg"),
+			new ResourceLocation("eagler:backgroundnew.jpg"),
+			new ResourceLocation("eagler:backgroundnew.jpg") };
 	private ResourceLocation backgroundTexture = null;
 	private static ResourceLocation backgroundTexture2 = null;
 
@@ -199,8 +199,6 @@ public class GuiMainMenu extends GuiScreen {
 		this.buttonList.add(new GuiButton(1, this.width / 2 - 100, p_73969_1_, I18n.format("menu.singleplayer")));
 		this.buttonList.add(
 				new GuiButton(2, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 1, I18n.format("menu.multiplayer")));
-		this.buttonList
-				.add(new GuiButton(14, this.width / 2 - 100, p_73969_1_ + p_73969_2_ * 2, I18n.format("menu.credits")));
 	}
 
 	/**
@@ -258,9 +256,6 @@ public class GuiMainMenu extends GuiScreen {
 			}
 		}
 
-		if (button.id == 14) {
-			this.mc.displayGuiScreen(new GuiCredits(this, "/assets/eagler/credits.txt"));
-		}
 	}
 
 	public void confirmClicked(boolean result, int id) {
