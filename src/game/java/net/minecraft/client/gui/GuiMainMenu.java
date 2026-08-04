@@ -72,6 +72,8 @@ public class GuiMainMenu extends GuiScreen {
 	private static final ResourceLocation SPLASH_TEXTS = new ResourceLocation("texts/splashes.txt");
 	private static final ResourceLocation MINECRAFT_TITLE_TEXTURES = new ResourceLocation(
 			"textures/gui/title/minecraft.png");
+	private static final ResourceLocation CUSTOM_TITLE_TEXTURE = new ResourceLocation(
+			"eagler:cosmixmc.png");
 	private static final ResourceLocation field_194400_H = new ResourceLocation("textures/gui/title/edition.png");
 	private static final ResourceLocation CUSTOM_MAIN_MENU_BACKGROUND = new ResourceLocation(
 			"eagler:backgroundnew.jpg");
@@ -459,18 +461,23 @@ public class GuiMainMenu extends GuiScreen {
 		int k = 30;
 		this.drawGradientRect(0, 0, this.width, this.height, -2130706433, 16777215);
 		this.drawGradientRect(0, 0, this.width, this.height, 0, Integer.MIN_VALUE);
-		this.mc.getTextureManager().bindTexture(MINECRAFT_TITLE_TEXTURES);
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-		if ((double) this.updateCounter < 1.0E-4D) {
-			this.drawTexturedModalRect(j + 0, 30, 0, 0, 99, 44);
-			this.drawTexturedModalRect(j + 99, 30, 129, 0, 27, 44);
-			this.drawTexturedModalRect(j + 99 + 26, 30, 126, 0, 3, 44);
-			this.drawTexturedModalRect(j + 99 + 26 + 3, 30, 99, 0, 26, 44);
-			this.drawTexturedModalRect(j + 155, 30, 0, 45, 155, 44);
+		if (EagRuntime.getResourceExists("/assets/eagler/cosmixmc.png")) {
+			this.mc.getTextureManager().bindTexture(CUSTOM_TITLE_TEXTURE);
+			this.drawModalRectWithCustomSizedTexture(j, 30, 0.0F, 0.0F, 310, 44, 310.0F, 44.0F);
 		} else {
-			this.drawTexturedModalRect(j + 0, 30, 0, 0, 155, 44);
-			this.drawTexturedModalRect(j + 155, 30, 0, 45, 155, 44);
+			this.mc.getTextureManager().bindTexture(MINECRAFT_TITLE_TEXTURES);
+			if ((double) this.updateCounter < 1.0E-4D) {
+				this.drawTexturedModalRect(j + 0, 30, 0, 0, 99, 44);
+				this.drawTexturedModalRect(j + 99, 30, 129, 0, 27, 44);
+				this.drawTexturedModalRect(j + 99 + 26, 30, 126, 0, 3, 44);
+				this.drawTexturedModalRect(j + 99 + 26 + 3, 30, 99, 0, 26, 44);
+				this.drawTexturedModalRect(j + 155, 30, 0, 45, 155, 44);
+			} else {
+				this.drawTexturedModalRect(j + 0, 30, 0, 0, 155, 44);
+				this.drawTexturedModalRect(j + 155, 30, 0, 45, 155, 44);
+			}
 		}
 
 		this.mc.getTextureManager().bindTexture(field_194400_H);

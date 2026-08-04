@@ -12,6 +12,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import net.lax1dude.eaglercraft.EagRuntime;
 
 public class SimpleTexture extends AbstractTexture {
 	private static final Logger LOG = LogManager.getLogger();
@@ -27,7 +28,18 @@ public class SimpleTexture extends AbstractTexture {
 
 		try {
 			iresource = resourceManager.getResource(this.textureLocation);
-			ImageData bufferedimage = TextureUtil.readBufferedImage(iresource.getInputStream());
+			ImageData bufferedimage = null;
+			try {
+				bufferedimage = TextureUtil.readBufferedImage(iresource.getInputStream());
+			}catch(IOException ex) {
+				LOGGER.warn("Failed to read image for texture {}", this.textureLocation, ex);
+				try {
+					EagRuntime.debugPrintStackTraceToSTDERR(ex);
+				}catch(Throwable t) {
+					// ignore
+				}
+				throw ex;
+			}
 			boolean flag = false;
 			boolean flag1 = false;
 
