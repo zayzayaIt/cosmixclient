@@ -46,7 +46,7 @@ public class GuiScreenEditCape extends GuiScreen {
 	private int mousey = 0;
 
 	private static final ResourceLocation eaglerGui = new ResourceLocation("eagler:gui/eagler_gui.png");
-		private static final ResourceLocation CUSTOM_MENU_BACKGROUND = new ResourceLocation("eagler:backgroundnew.jpg");
+		private static final ResourceLocation CUSTOM_MENU_BACKGROUND = new ResourceLocation("eagler:backgroundnew.png");
 
 	protected String screenTitle = "Edit Cape";
 

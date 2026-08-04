@@ -59,9 +59,9 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback {
 	/** The FontRenderer used by GuiScreen */
 	protected FontRenderer fontRendererObj;
 
-	private static final ResourceLocation CUSTOM_MENU_BACKGROUND = new ResourceLocation("eagler:backgroundnew.jpg");
-	private static final ResourceLocation CUSTOM_MENU_BACKGROUND_ALT = new ResourceLocation("eagler:gui/backgroundnew.jpg");
-	private static final ResourceLocation CUSTOM_MENU_BACKGROUND_MC = new ResourceLocation("minecraft:gui/title/background/backgroundnew.jpg");
+	private static final ResourceLocation CUSTOM_MENU_BACKGROUND = new ResourceLocation("eagler:backgroundnew.png");
+	private static final ResourceLocation CUSTOM_MENU_BACKGROUND_ALT = new ResourceLocation("eagler:gui/backgroundnew.png");
+	private static final ResourceLocation CUSTOM_MENU_BACKGROUND_MC = new ResourceLocation("minecraft:gui/title/background/backgroundnew.png");
 
 	/** The button that was just pressed. */
 	protected GuiButton selectedButton;
@@ -502,16 +502,16 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback {
 			// Prefer the bundled eagler background if it exists; try several possible locations
 			boolean found = false;
 			try {
-				if(EagRuntime.getResourceExists("/assets/eagler/backgroundnew.jpg")) {
-					System.out.println("Binding background: /assets/eagler/backgroundnew.jpg");
+				if(EagRuntime.getResourceExists("/assets/eagler/backgroundnew.png")) {
+					System.out.println("Binding background: /assets/eagler/backgroundnew.png");
 					this.mc.getTextureManager().bindTexture(CUSTOM_MENU_BACKGROUND);
 					found = true;
-				}else if(EagRuntime.getResourceExists("/assets/eagler/gui/backgroundnew.jpg")) {
-					System.out.println("Binding background: /assets/eagler/gui/backgroundnew.jpg");
+				}else if(EagRuntime.getResourceExists("/assets/eagler/gui/backgroundnew.png")) {
+					System.out.println("Binding background: /assets/eagler/gui/backgroundnew.png");
 					this.mc.getTextureManager().bindTexture(CUSTOM_MENU_BACKGROUND_ALT);
 					found = true;
-				}else if(EagRuntime.getResourceExists("/assets/minecraft/textures/gui/title/background/backgroundnew.jpg")) {
-					System.out.println("Binding background: /assets/minecraft/textures/gui/title/background/backgroundnew.jpg");
+				}else if(EagRuntime.getResourceExists("/assets/minecraft/textures/gui/title/background/backgroundnew.png")) {
+					System.out.println("Binding background: /assets/minecraft/textures/gui/title/background/backgroundnew.png");
 					this.mc.getTextureManager().bindTexture(CUSTOM_MENU_BACKGROUND_MC);
 					found = true;
 				}
@@ -539,10 +539,10 @@ public abstract class GuiScreen extends Gui implements GuiYesNoCallback {
 		if (this.mc.world != null) {
 			// If a bundled custom background exists, draw it for all screens (in-game and menus)
 			try {
-				if(EagRuntime.getResourceExists("/assets/eagler/backgroundnew.jpg") || EagRuntime.getResourceExists("/assets/eagler/gui/backgroundnew.jpg") || EagRuntime.getResourceExists("/assets/minecraft/textures/gui/title/background/backgroundnew.jpg")) {
+				if(EagRuntime.getResourceExists("/assets/eagler/backgroundnew.png") || EagRuntime.getResourceExists("/assets/eagler/gui/backgroundnew.png") || EagRuntime.getResourceExists("/assets/minecraft/textures/gui/title/background/backgroundnew.png")) {
 					ResourceLocation rl = CUSTOM_MENU_BACKGROUND;
-					if(EagRuntime.getResourceExists("/assets/eagler/gui/backgroundnew.jpg")) rl = CUSTOM_MENU_BACKGROUND_ALT;
-					if(EagRuntime.getResourceExists("/assets/minecraft/textures/gui/title/background/backgroundnew.jpg")) rl = CUSTOM_MENU_BACKGROUND_MC;
+					if(EagRuntime.getResourceExists("/assets/eagler/gui/backgroundnew.png")) rl = CUSTOM_MENU_BACKGROUND_ALT;
+					if(EagRuntime.getResourceExists("/assets/minecraft/textures/gui/title/background/backgroundnew.png")) rl = CUSTOM_MENU_BACKGROUND_MC;
 					this.mc.getTextureManager().bindTexture(rl);
 					GlStateManager.color(1.0F,1.0F,1.0F,1.0F);
 					drawModalRectWithCustomSizedTexture(0, 0, 0.0F, 0.0F, this.width, this.height, 735.0F, 412.0F);

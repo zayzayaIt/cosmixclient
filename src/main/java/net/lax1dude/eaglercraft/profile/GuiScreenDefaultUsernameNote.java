@@ -25,7 +25,7 @@ public class GuiScreenDefaultUsernameNote extends GuiScreen {
 
 	private final GuiScreen back;
 	private final GuiScreen cont;
-	private static final ResourceLocation CUSTOM_MENU_BACKGROUND = new ResourceLocation("eagler:backgroundnew.jpg");
+	private static final ResourceLocation CUSTOM_MENU_BACKGROUND = new ResourceLocation("eagler:backgroundnew.png");
 
 	public GuiScreenDefaultUsernameNote(GuiScreen back, GuiScreen cont) {
 		this.back = back;

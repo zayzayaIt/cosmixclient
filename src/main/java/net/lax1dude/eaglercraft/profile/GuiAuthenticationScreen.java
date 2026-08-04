@@ -38,7 +38,7 @@ public class GuiAuthenticationScreen extends GuiScreen {
 	private GuiPasswordTextField password;
 	private int authTypeForWarning = Integer.MAX_VALUE;
 	private boolean allowPlaintext = false;
-	private static final ResourceLocation CUSTOM_MENU_BACKGROUND = new ResourceLocation("eagler:backgroundnew.jpg");
+	private static final ResourceLocation CUSTOM_MENU_BACKGROUND = new ResourceLocation("eagler:backgroundnew.png");
 
 	public GuiAuthenticationScreen(GuiConnecting retAfterAuthScreen, GuiScreen parent, String message) {
 		this.retAfterAuthScreen = retAfterAuthScreen;

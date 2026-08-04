@@ -6,15 +6,33 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+	 * Draws the screen and all the components in it.
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-
-import net.lax1dude.eaglercraft.EagRuntime;
-import net.lax1dude.eaglercraft.EaglercraftRandom;
-import net.lax1dude.eaglercraft.EaglercraftVersion;
-import net.lax1dude.eaglercraft.IOUtils;
-import net.lax1dude.eaglercraft.internal.PlatformApplication;
+		this.panoramaTimer += partialTicks;
+		GlStateManager.disableAlpha();
+		// If a bundled PNG background exists, draw it stretched full-screen and skip the panorama.
+		try {
+			if (EagRuntime.getResourceExists("/assets/eagler/backgroundnew.png")
+					|| EagRuntime.getResourceExists("/assets/eagler/gui/backgroundnew.png")
+					|| EagRuntime.getResourceExists("/assets/minecraft/textures/gui/title/background/backgroundnew.png")) {
+				ResourceLocation bg = CUSTOM_MAIN_MENU_BACKGROUND;
+				if (EagRuntime.getResourceExists("/assets/eagler/gui/backgroundnew.png")) bg = new ResourceLocation("eagler:gui/backgroundnew.png");
+				if (EagRuntime.getResourceExists(
+					"/assets/minecraft/textures/gui/title/background/backgroundnew.png"))
+					bg = new ResourceLocation(
+						"minecraft:gui/title/background/backgroundnew.png");
+				this.mc.getTextureManager().bindTexture(bg);
+				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+				drawModalRectWithCustomSizedTexture(0, 0, 0.0F, 0.0F, this.width, this.height,
+					(float) this.width, (float) this.height);
+			} else {
+				this.renderSkybox(mouseX, mouseY, partialTicks);
+			}
+		} catch (Throwable t) {
+			this.renderSkybox(mouseX, mouseY, partialTicks);
+		}
+		GlStateManager.enableAlpha();
 import net.lax1dude.eaglercraft.internal.PlatformOpenGL;
 import net.lax1dude.eaglercraft.minecraft.MainMenuSkyboxTexture;
 import net.lax1dude.eaglercraft.opengl.WorldRenderer;
