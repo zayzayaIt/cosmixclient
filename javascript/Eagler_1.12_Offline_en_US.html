@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" style="width:100%;height:100%;background-color:black;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="Eaglercraft 1.12.2 Offline">
+    <meta name="keywords" content="eaglercraft, minecraft">
+    <title>CosmixClient (Offline)</title>
+    <meta property="og:locale" content="en-US">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="CosmixClient Offline">
+    <meta property="og:description" content="Local offline build">
+    <script type="text/javascript">
+        "use strict";
+        var relayId = Math.floor(Math.random() * 3);
+
+        // %%%%%%%%% launch options %%%%%%%%%%%%
+
+        window.eaglercraftXOpts = {
+            container: "game_frame",
+            worldsDB: "worlds",
+            servers: []
+        };
+
+        // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    </script>
+    <script type="text/javascript">
+        "use strict";
+        if(typeof window !== "undefined") {
+            window.eaglercraftXClientScriptElement = document.currentScript;
+            window.eaglercraftXClientScriptURL = "classes.js";
+        }
+    </script>
+    <script type="text/javascript" src="classes.js"></script>
+    <script type="text/javascript">
+        "use strict";
+        (function(){
+            // Load external assets.epk from same directory so updated assets (background PNG, cosmixmc.png) are used
+            window.eaglercraftXOpts.assetsURI = "assets.epk";
+
+            var launchInterval = -1;
+            var launchCounter = 1;
+            var launchCountdownNumberElement = null;
+            var launchCountdownProgressElement = null;
+            var launchSkipCountdown = false;
+
+            var launchTick = function() {
+                launchCountdownNumberElement.innerText = "" + Math.floor(6.0 - launchCounter * 0.06);
+                launchCountdownProgressElement.style.width = "" + launchCounter + "%";
+                if(++launchCounter > 100 || launchSkipCountdown) {
+                    clearInterval(launchInterval);
+                    setTimeout(function() {
+                        document.body.removeChild(document.getElementById("launch_countdown_screen"));
+                        document.body.style.backgroundColor = "black";
+                        main();
+                    }, 50);
+                }
+            };
+
+            window.addEventListener("load", function() {
+                launchCountdownNumberElement = document.getElementById("launchCountdownNumber");
+                launchCountdownProgressElement = document.getElementById("launchCountdownProgress");
+                launchInterval = setInterval(launchTick, 50);
+                document.getElementById("skipCountdown").addEventListener("click", function() {
+                    launchSkipCountdown = true;
+                });
+                document.getElementById("skipCountdown").focus();
+            });
+        })();
+    </script>
+</head>
+<body style="margin:0px;width:100%;height:100%;overflow:hidden;background-color:#121212;" id="game_frame">
+    <div style="margin:0px;width:100%;height:100%;font-family:sans-serif;display:flex;align-items:center;user-select:none;" id="launch_countdown_screen">
+        <div style="margin:auto;text-align:center;color:#FFFFFF;">
+            <h1>Offline build</h1>
+            <h2>Game will launch in <span id="launchCountdownNumber">5</span>...</h2>
+            <div style="border:2px solid #FFFFFF;width:100%;height:15px;padding:1px;margin-bottom:20vh;max-width:600px;margin-left:auto;margin-right:auto;">
+                <div id="launchCountdownProgress" style="background-color:#555555;width:0%;height:100%;"></div>
+            </div>
+            <button id="skipCountdown" autofocus style="padding:10px 20px;font-size:1rem;color:#FFFFFF;background-color:#333333;border:none;cursor:pointer;border-radius:5px;">Skip</button>
+        </div>
+    </div>
+</body>
+</html>
