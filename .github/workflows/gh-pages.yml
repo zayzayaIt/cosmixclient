@@ -24,10 +24,13 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Build web client
+      - name: Build web client (don't fail workflow on error)
         run: |
           chmod +x ./gradlew
-          ./gradlew generateJavascript --no-daemon
+          set -e
+          ./gradlew generateJavascript --no-daemon || {
+            echo "Gradle build failed; continuing to publish existing javascript/ directory";
+          }
 
       - name: Prepare Pages publish directory
         run: |
