@@ -12,11 +12,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Deploy `javascript/` to `gh-pages`
+      - name: Prepare Pages publish directory
+        run: |
+          mkdir -p .pages-publish
+          cp -R javascript/. .pages-publish/
+          cp index.html .pages-publish/index.html
+
+      - name: Deploy site to `gh-pages`
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./javascript
+          publish_dir: ./.pages-publish
           publish_branch: gh-pages
           user_name: github-actions
           user_email: github-actions@github.com
