@@ -1,5 +1,7 @@
 package net.lax1dude.eaglercraft.internal;
 
+import java.awt.GraphicsEnvironment;
+
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -45,15 +47,24 @@ public class LWJGLEntryPoint {
 		}
 
 		if (!hideRenderDocDialog) {
-			LaunchRenderDocDialog lr = new LaunchRenderDocDialog();
-			lr.setLocationRelativeTo(null);
-			lr.setVisible(true);
+			boolean headless = GraphicsEnvironment.isHeadless();
+			if (!headless) {
+				try {
+					LaunchRenderDocDialog lr = new LaunchRenderDocDialog();
+					lr.setLocationRelativeTo(null);
+					lr.setVisible(true);
 
-			while (lr.isVisible()) {
-				EagUtils.sleep(100);
+					while (lr.isVisible()) {
+						EagUtils.sleep(100);
+					}
+
+					lr.dispose();
+				} catch (Throwable t) {
+					System.err.println("Could not show render doc dialog: " + t.toString());
+				}
+			} else {
+				System.out.println("Running in headless mode, skipping render doc dialog");
 			}
-
-			lr.dispose();
 		}
 
 		getPlatformOptionsFromArgs(args);

@@ -123,14 +123,22 @@ public class PlatformRuntime {
 		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 
 		PointerBuffer buf = glfwGetMonitors();
-		GLFWVidMode mon = glfwGetVideoMode(buf.get(0));
-
-		int windowWidth = mon.width() - 200;
-		int windowHeight = mon.height() - 250;
+		GLFWVidMode mon = null;
+		int windowWidth = 1280;
+		int windowHeight = 720;
 		String title = "Eaglercraft Desktop Runtime";
+		int winX = 0;
+		int winY = 0;
 
-		int winX = (mon.width() - windowWidth) / 2;
-		int winY = (mon.height() - windowHeight - 20) / 2;
+		if (buf != null && buf.remaining() > 0) {
+			mon = glfwGetVideoMode(buf.get(0));
+		}
+		if (mon != null) {
+			windowWidth = Math.max(640, mon.width() - 200);
+			windowHeight = Math.max(480, mon.height() - 250);
+			winX = (mon.width() - windowWidth) / 2;
+			winY = (mon.height() - windowHeight - 20) / 2;
+		}
 
 		int myGLVersion = -1;
 		if (requestedGLVersion >= 310 && windowHandle == 0) {
