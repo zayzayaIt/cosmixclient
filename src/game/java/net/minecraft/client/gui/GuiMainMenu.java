@@ -493,17 +493,15 @@ public class GuiMainMenu extends GuiScreen {
 		GlStateManager.scale(f, f, f);
 		this.drawCenteredString(this.fontRendererObj, this.splashText, 0, -8, -256);
 		GlStateManager.popMatrix();
-		String s = "Minecraft 1.12.2";
-
+		// Replace default client/version footer with CosmixClient branding
+		String footer = "CosmixClient v1.0.0 by jamie666";
 		if (this.mc.isDemo()) {
-			s = s + " Demo";
+			footer = footer + " Demo";
 		}
 
-		this.drawString(this.fontRendererObj, s, 2, this.height - 20, -1);
-		this.drawString(this.fontRendererObj, "CosmixClient v1.0.0 by jamie666", 2,
-				this.height - 10, -1);
+		this.drawString(this.fontRendererObj, footer, 2, this.height - 20, -1);
 		this.drawString(this.fontRendererObj, "Resources copyright Mojang AB", this.field_193979_N, this.height - 10,
-				-1);
+			-1);
 
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
