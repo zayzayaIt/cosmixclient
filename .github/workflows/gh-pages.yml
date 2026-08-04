@@ -18,9 +18,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Skip build — using prebuilt `javascript/`
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Build web client
         run: |
-          echo "Skipping Java build; publishing existing javascript/ directory"
+          chmod +x ./gradlew
+          ./gradlew generateJavascript --no-daemon
 
       - name: Prepare Pages publish directory
         run: |
