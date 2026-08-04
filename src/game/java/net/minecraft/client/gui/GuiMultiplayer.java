@@ -19,7 +19,7 @@ import org.apache.logging.log4j.Logger;
 public class GuiMultiplayer extends GuiScreen {
 	private static final Logger LOGGER = LogManager.getLogger();
 	private static final ResourceLocation CUSTOM_MENU_BACKGROUND = new ResourceLocation(
-			"textures/gui/title/background/custom_menu_bg.jpg");
+			"eagler:backgroundnew.jpg");
 	private final GuiScreen parentScreen;
 	private ServerSelectionList serverListSelector;
 	private ServerList savedServerList;

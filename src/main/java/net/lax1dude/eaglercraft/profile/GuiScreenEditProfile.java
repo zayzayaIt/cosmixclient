@@ -37,7 +37,7 @@ import java.io.IOException;
 public class GuiScreenEditProfile extends GuiScreen {
 
 	private static final ResourceLocation CUSTOM_MENU_BACKGROUND = new ResourceLocation(
-			"textures/gui/title/background/custom_menu_bg.jpg");
+			"eagler:backgroundnew.jpg");
 
 	private final GuiScreen parent;
 	private GuiTextField usernameField;
